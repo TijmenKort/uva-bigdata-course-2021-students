@@ -2,6 +2,8 @@ package nl.uva.bigdata.hadoop.exercise1;
 
 import org.apache.hadoop.io.Writable;
 
+import static java.lang.String.valueOf;
+
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
@@ -12,7 +14,8 @@ public class NumberPairWritable implements Writable {
   private int firstNumber;
   private int secondNumber;
 
-  public NumberPairWritable() {}
+  public NumberPairWritable() {
+  }
 
   public NumberPairWritable(Integer firstNumber, Integer secondNumber) {
     this.firstNumber = firstNumber;
@@ -26,12 +29,14 @@ public class NumberPairWritable implements Writable {
 
   @Override
   public void write(DataOutput out) throws IOException {
-    // TODO Implement me
+    out.writeInt(this.firstNumber);
+    out.writeInt(this.secondNumber);
   }
 
   @Override
   public void readFields(DataInput in) throws IOException {
-    // TODO Implement me
+    this.firstNumber = in.readInt();
+    this.secondNumber = in.readInt();
   }
 
   @Override
